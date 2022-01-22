@@ -161,3 +161,4 @@ cython_debug/
 *.png
 !*BugAssigneeRecommendation.ipynb
 !*BugAssigneeRecommendation-BOW.ipynb
+!*BOW.ipynb
