@@ -171,7 +171,7 @@ def mean_std(json_path):
 
 # write a function that is a regex to match a string of characters that are not a letters or numbers and change it with a space
 def regex_match(string):
-    string = re.sub(r'[^a-zA-Z0-9]', ' ', string)
+    string = re.sub(r'[^a-zA-Z0-9]+', ' ', string)
     return string
 # plot histogram from plot_dict where x axis is number of keys and y axis is number of occurrence
 def plot_histogram(json_path,bin_size):
@@ -218,8 +218,26 @@ def plot_histogram(json_path,bin_size):
 def sort_dict_by_key(dictionary):
     return dict(sorted(dictionary.items(), key=lambda kv: kv[1], reverse=True))
 
+# detect if string contains any non alphanumeric characters
+def is_alphanumeric(string):
+    return re.match(r'[^a-zA-Z0-9]', string)
+
+# read json path and apply regex_match function to descriptions in json file
+def regex_match_json(json_path, new_json_path):
+    # load json file
+    with open(json_path) as f:
+        data = json.load(f)
+    # create a new dictionary
+    regex_data = []
+    # iterate through 
+    for item in data:
+        #print(item['description'])
+        description = regex_match(item['description'])
+        regex_data.append({'description': description, 'assignee': item['assignee']})
+    write_json(regex_data, new_json_path)
 # create python main function
 if __name__ == '__main__':
+    '''
     desc_data = read_txt('data_preprocessed_desc.txt')
     assignee_data = read_txt('data_preprocessed_assignee.txt')
     #json_data = create_json(desc_data, assignee_data)
@@ -249,3 +267,18 @@ if __name__ == '__main__':
     #print(count_keys(count_assignee_occurrence('kafka_data_preprocessed_high_occurrence.json')))
     #plot_histogram('kafka_data_preprocessed_high_occurrence_10.json',10)
     pass
+'''
+    regex_match_json('project_data.json', 'project_data_regex.json')
+
+'''
+with open(save_path+'kafka_data_preprocessed_high_occurrence_50.json') as f:
+    data = json.load(f)
+    # shuffle data
+    random.shuffle(data)
+    # create description and assignee list
+    desc_data = []
+    assignee_data = []
+    for item in data:
+        desc_data.append(item['description'])
+        assignee_data.append(item['assignee'])
+'''
