@@ -5,6 +5,7 @@ import numpy as np
 from matplotlib.figure import Figure
 from matplotlib.ticker import MaxNLocator
 import datetime
+import re
 # create json from 2 lists
 def create_json(desc_data, assignee_data):
     data = []
@@ -168,7 +169,10 @@ def mean_std(json_path):
     std = std ** 0.5
     return mean, std
 
-
+# write a function that is a regex to match a string of characters that are not a letters or numbers and change it with a space
+def regex_match(string):
+    string = re.sub(r'[^a-zA-Z0-9]', ' ', string)
+    return string
 # plot histogram from plot_dict where x axis is number of keys and y axis is number of occurrence
 def plot_histogram(json_path,bin_size):
     # create a new dictionary from count_assignee_occurrence where the key is number of assignees and value is the number of occurrence
