@@ -152,13 +152,3 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-
-# Datasets
-1_jira_kafka_2021-08-09.json
-*.txt
-*.json
-*.ipynb
-*.png
-!*BugAssigneeRecommendation.ipynb
-!*BugAssigneeRecommendation-BOW.ipynb
-!*BOW.ipynb
